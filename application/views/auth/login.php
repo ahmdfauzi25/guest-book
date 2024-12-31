@@ -1,3 +1,38 @@
+	<style>
+		.container-fluid {
+			background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('assets/img/symphony.png');
+			/* background-size: contain; */
+			background-position: center;
+		}
+		.card {
+			border-radius: 15px;
+			overflow: hidden;
+		}
+		.card-body {
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+		}
+		.btn-primary {
+			background-color: #4e73df;
+			border: none;
+			border-radius: 25px;
+		}
+		.btn-primary:hover {
+			background-color: #3e5bbf;
+		}
+		.text-center h1 {
+			color: #4e73df;
+			font-weight: bold;
+		}
+		.logo {
+			transition: transform 0.3s, color 0.3s;
+		}
+		.logo:hover {
+			transform: scale(1.1);
+			color: #3e5bbf;
+			text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+		}
+	</style>
+
 	<div class="container-fluid" style="font-family: 'Nunito', sans-serif; background-image: url('assets/img/symphony.png'); background-size: repeat; background-position: center; height: 100vh;">
 
 		<!-- Outer Row -->
@@ -13,7 +48,7 @@
 							<div class="col-lg">
 								<div class="p-5">
 									<div class="text-center">
-										<i class="fas fa-book" style="font-size: 3rem; color: #4e73df;"></i>
+										<img src="assets/img/book.png" class="logo" style="width: 3rem; height: auto;">
 										<h1 class="h4 text-gray-900 mb-4">Sistem Buku Tamu</h1>
 									</div>
 									<?= $this->session->flashdata('message'); ?>
