@@ -47,3 +47,9 @@ Let’s make this guestbook even better! 🚀
 ---  
 
 This version is more structured and visually engaging, perfect for GitHub! Let me know if you’d like further tweaks. 🚀
+
+![image](https://github.com/user-attachments/assets/b4346509-aa64-45dd-bda8-14d43e1c3275)
+
+![image](https://github.com/user-attachments/assets/6770003f-f3f6-4c13-b2db-5c62ae18627f)
+
+
