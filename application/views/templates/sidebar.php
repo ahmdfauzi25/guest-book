@@ -5,9 +5,9 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 	<!-- Sidebar - Brand -->
-	<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+	<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('admin'); ?>">
 		<div class="sidebar-brand-icon rotate-n-15">
-			<i class="fas fa-book"></i>
+			<img src="<?= base_url('assets/img/book.png'); ?>" alt="Logo" style="width: 30px; height: 30px;">
 		</div>
 		<div class="sidebar-brand-text mx-3">Buku Tamu <sup>1.0</sup></div>
 	</a>

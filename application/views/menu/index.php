@@ -8,34 +8,41 @@
 
 	<div class="row">
 		<div class="col-lg-6">
-			<?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-			<?= $this->session->flashdata('message'); ?>
-			<a href="" class="btn btn-primary" data-toggle="modal" data-target="#newMenuModal">Add New Menu</a>
+			<!-- Card Container -->
+			<div class="card mb-4">
+				<div class="card-header">
+					<h5 class="card-title"><?= $title; ?></h5>
+				</div>
+				<div class="card-body">
+					<?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+					<?= $this->session->flashdata('message'); ?>
+					<a href="" class="btn btn-primary" data-toggle="modal" data-target="#newMenuModal">Add New Menu</a>
 
-			<table class="table table-hover mt-3">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Menu</th>
-						<th scope="col">Action</th>
-						<!-- <th scope="col">#</th> -->
-					</tr>
-				</thead>
-				<tbody>
-					<?php $i = 1;  ?>
-					<?php foreach ($menu as $m) : ?>
-						<tr>
-							<th scope="row"><?= $i; ?></th>
-							<td><?= $m['menu']; ?></td>
-							<td>
-								<a href="" class="badge badge-success" data-toggle="modal" data-target="#editMenuModal<?= $m['id']; ?>">Edit</a>
-								<a href="<?= base_url('menu/delete/') . $m['id']; ?>" class="badge badge-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus menu ini?');">Delete</a>
-							</td>
-						</tr>
-						<?php $i++; ?>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
+					<table class="table table-hover mt-3">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Menu</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php $i = 1; ?>
+							<?php foreach ($menu as $m) : ?>
+								<tr>
+									<th scope="row"><?= $i; ?></th>
+									<td><?= $m['menu']; ?></td>
+									<td>
+										<a href="" class="badge badge-success" data-toggle="modal" data-target="#editMenuModal<?= $m['id']; ?>">Edit</a>
+										<a href="<?= base_url('menu/delete/') . $m['id']; ?>" class="badge badge-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus menu ini?');">Delete</a>
+									</td>
+								</tr>
+								<?php $i++; ?>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 

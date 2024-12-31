@@ -8,34 +8,42 @@
 
 	<div class="row">
 		<div class="col-lg-6">
-			<?= form_error('servicetype', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-			<?= $this->session->flashdata('message'); ?>
-			<a href="" class="btn btn-primary" data-toggle="modal" data-target="#newServiceTypeModal">Add New Service Type</a>
+			<!-- Card Container -->
+			<div class="card mt-3">
+				<div class="card-header">
+					<h5 class="card-title">Daftar Tipe Layanan</h5>
+				</div>
+				<div class="card-body">
+					<?= form_error('servicetype', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+					<?= $this->session->flashdata('message'); ?>
+					<a href="" class="btn btn-primary" data-toggle="modal" data-target="#newServiceTypeModal">Add New Service Type</a>
 
-			<table class="table table-hover mt-3">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Service Type</th>
-						<th scope="col">Action</th>
-						<!-- <th scope="col">#</th> -->
-					</tr>
-				</thead>
-				<tbody>
-					<?php $i = 1;  ?>
-					<?php foreach ($servicetype as $st) : ?>
-						<tr>
-							<th scope="row"><?= $i; ?></th>
-							<td><?= $st['service_type']; ?></td>
-							<td>
-								<a href="" class="badge badge-success" data-toggle="modal" data-target="#editServiceTypeModal<?= $st['id']; ?>">Edit</a>
-								<a href="<?= base_url('servicetype/delete/') . $st['id']; ?>" class="badge badge-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus service type ini?');">Delete</a>
-							</td>
-						</tr>
-						<?php $i++; ?>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
+					<table class="table table-hover mt-3">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Service Type</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php $i = 1;  ?>
+							<?php foreach ($servicetype as $st) : ?>
+								<tr>
+									<th scope="row"><?= $i; ?></th>
+									<td><?= $st['service_type']; ?></td>
+									<td>
+										<a href="" class="badge badge-success" data-toggle="modal" data-target="#editServiceTypeModal<?= $st['id']; ?>">Edit</a>
+										<a href="<?= base_url('servicetype/delete/') . $st['id']; ?>" class="badge badge-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus service type ini?');">Delete</a>
+									</td>
+								</tr>
+								<?php $i++; ?>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- End Card Container -->
 		</div>
 	</div>
 

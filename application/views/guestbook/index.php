@@ -8,63 +8,69 @@
 
 	<div class="row">
 		<div class="col-lg">
-			<?= form_error('guestbook', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-			<?= $this->session->flashdata('message'); ?>
-			<a href="" class="btn btn-primary" data-toggle="modal" data-target="#newGuestbookModal">Add New Guest</a>
-
-			<table class="table table-hover mt-3">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Name Quest</th>
-						<th scope="col">Instansi</th>
-						<th scope="col">Service Type</th>
-						<th scope="col">Telp</th>
-						<th scope="col">Needs</th>
-						<th scope="col">Arrival Time</th>
-						<th scope="col">Return Time</th>
-						<th scope="col">Schedule</th>
-						<th scope="col">Status</th>
-						<th scope="col">Action</th>
-						<!-- <th scope="col">#</th> -->
-					</tr>
-				</thead>
-				<tbody>
-					<?php $i = 1;  ?>
-					<?php foreach ($guestbook as $gb) : ?>
-						<tr>
-							<th scope="row"><?= $i; ?></th>
-							<td><?= $gb['name_guest']; ?></td>
-							<td><?= $gb['instansi']; ?></td>
-							<td><?php 
-								foreach($servicetype as $s) {
-									if($s['id'] == $gb['servicetype_id']) {
-										echo $s['service_type'];
-										break;
-									}
-								}
-							?></td>
-							<td><?= $gb['no_telp']; ?></td>
-							<td><?= $gb['kepentingan']; ?></td>
-							<td><?= $gb['waktu_kedatangan']; ?></td>
-							<td><?= $gb['waktu_kepulangan']; ?></td>
-							<td><?= date('d-m-Y', strtotime($gb['date_created'])); ?></td>
-							<td>
-							<?php if($gb['status'] == 1) : ?>
-									<span class="badge badge-success">Sudah Hadir</span>
-								<?php else : ?>
-									<span class="badge badge-warning">Belum Hadir</span>
-								<?php endif; ?>
-						</td>
-							<td>
-							<a href="" class="badge badge-success" data-toggle="modal" data-target="#editGuestbookModal<?= $gb['id']; ?>">Edit</a>
-							<a href="<?=base_url('guestbook/delete/') . $gb['id']; ?>" class="badge badge-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus Tamu ini?');">Delete</a>
-								</td>
-						</tr>
-						<?php $i++; ?>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
+			<!-- Menambahkan card untuk menampilkan guestbook -->
+			<div class="card">
+				<div class="card-header">
+					<!-- <h2 class="card-title"><?= $title; ?></h2> -->
+					<a href="" class="btn btn-primary" data-toggle="modal" data-target="#newGuestbookModal">Add New Guest</a>
+				</div>
+				<div class="card-body">
+					<?= form_error('guestbook', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+					<?= $this->session->flashdata('message'); ?>
+					<table class="table table-hover mt-3">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Name Quest</th>
+								<th scope="col">Instansi</th>
+								<th scope="col">Service Type</th>
+								<th scope="col">Telp</th>
+								<th scope="col">Needs</th>
+								<th scope="col">Arrival Time</th>
+								<th scope="col">Return Time</th>
+								<th scope="col">Schedule</th>
+								<th scope="col">Status</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php $i = 1; ?>
+							<?php foreach ($guestbook as $gb) : ?>
+								<tr>
+									<th scope="row"><?= $i; ?></th>
+									<td><?= $gb['name_guest']; ?></td>
+									<td><?= $gb['instansi']; ?></td>
+									<td><?php 
+										foreach($servicetype as $s) {
+											if($s['id'] == $gb['servicetype_id']) {
+												echo $s['service_type'];
+												break;
+											}
+										}
+									?></td>
+									<td><?= $gb['no_telp']; ?></td>
+									<td><?= $gb['kepentingan']; ?></td>
+									<td><?= $gb['waktu_kedatangan']; ?></td>
+									<td><?= $gb['waktu_kepulangan']; ?></td>
+									<td><?= date('d-m-Y', strtotime($gb['date_created'])); ?></td>
+									<td>
+										<?php if($gb['status'] == 1) : ?>
+											<span class="badge badge-success">Sudah Hadir</span>
+										<?php else : ?>
+											<span class="badge badge-warning">Belum Hadir</span>
+										<?php endif; ?>
+									</td>
+									<td>
+										<a href="" class="badge badge-success" data-toggle="modal" data-target="#editGuestbookModal<?= $gb['id']; ?>">Edit</a>
+										<a href="<?=base_url('guestbook/delete/') . $gb['id']; ?>" class="badge badge-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus Tamu ini?');">Delete</a>
+									</td>
+								</tr>
+								<?php $i++; ?>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 

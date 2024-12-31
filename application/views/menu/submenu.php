@@ -8,52 +8,58 @@
 
 	<div class="row">
 		<div class="col-lg">
-			<?php if (validation_errors()) : ?>
-				<div class="alert alert-danger" role="alert">
-					<?= validation_errors(); ?>
+			<!-- Card Container -->
+			<div class="card mb-4">
+				<div class="card-header">
+					<h5 class="m-0 font-weight-bold text-primary">Sub Menu List</h5>
 				</div>
-				<?= $this->session->flashdata('message'); ?>
-			<?php endif; ?>
-			<a href="" class="btn btn-primary" data-toggle="modal" data-target="#newSubMenuModal">Add New Sub-Menu</a>
+				<div class="card-body">
+					<?php if (validation_errors()) : ?>
+						<div class="alert alert-danger" role="alert">
+							<?= validation_errors(); ?>
+						</div>
+						<?= $this->session->flashdata('message'); ?>
+					<?php endif; ?>
+					<a href="" class="btn btn-primary" data-toggle="modal" data-target="#newSubMenuModal">Add New Sub-Menu</a>
 
-			<table class="table table-hover mt-3">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Title</th>
-						<th scope="col">Menu</th>
-						<th scope="col">url</th>
-						<th scope="col">icon</th>
-						<th scope="col">Active</th>
-						<th scope="col">Action</th>
-						<!-- <th scope="col">#</th> -->
-					</tr>
-				</thead>
-				<tbody>
-					<?php $i = 1;  ?>
-					<?php foreach ($subMenu as $sm) : ?>
-						<tr>
-							<th scope="row"><?= $i; ?></th>
-							<td><?= $sm['title']; ?></td>
-							<td><?= $sm['menu']; ?></td>
-							<td><?= $sm['url']; ?></td>
-							<td><?= $sm['icon']; ?></td>
-							<td>
-								<?php if($sm['is_active'] == 1) : ?>
-									<span class="badge badge-success">Aktif</span>
-								<?php else : ?>
-									<span class="badge badge-danger">Non-aktif</span>
-								<?php endif; ?>
-							</td>
-							<td>
-						   
-								<a href="<?=base_url('menu/submenudelete/') . $sm['id']; ?>" class="badge badge-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus submenu ini?');">Delete</a>
-							</td>
-						</tr>
-						<?php $i++; ?>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
+					<table class="table table-hover mt-3">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Title</th>
+								<th scope="col">Menu</th>
+								<th scope="col">url</th>
+								<th scope="col">icon</th>
+								<th scope="col">Active</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php $i = 1;  ?>
+							<?php foreach ($subMenu as $sm) : ?>
+								<tr>
+									<th scope="row"><?= $i; ?></th>
+									<td><?= $sm['title']; ?></td>
+									<td><?= $sm['menu']; ?></td>
+									<td><?= $sm['url']; ?></td>
+									<td><?= $sm['icon']; ?></td>
+									<td>
+										<?php if($sm['is_active'] == 1) : ?>
+											<span class="badge badge-success">Aktif</span>
+										<?php else : ?>
+											<span class="badge badge-danger">Non-aktif</span>
+										<?php endif; ?>
+									</td>
+									<td>
+										<a href="<?=base_url('menu/submenudelete/') . $sm['id']; ?>" class="badge badge-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus submenu ini?');">Delete</a>
+									</td>
+								</tr>
+								<?php $i++; ?>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 

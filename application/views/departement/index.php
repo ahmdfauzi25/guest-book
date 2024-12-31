@@ -4,40 +4,46 @@
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
+	<!-- Card Section -->
+	<div class="card mb-4">
+		<div class="card-header">
+			<h5 class="m-0 font-weight-bold text-primary">Departement List</h5>
+		</div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col-lg">
+					<?= form_error('departement', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+					<?= $this->session->flashdata('message'); ?>
+					<a href="" class="btn btn-primary" data-toggle="modal" data-target="#newDepartementModal">Add New Departement</a>
 
-
-	<div class="row">
-		<div class="col-lg-6">
-			<?= form_error('departement', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-			<?= $this->session->flashdata('message'); ?>
-			<a href="" class="btn btn-primary" data-toggle="modal" data-target="#newDepartementModal">Add New Departement</a>
-
-			<table class="table table-hover mt-3">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Departement</th>
-						<th scope="col">Action</th>
-						<!-- <th scope="col">#</th> -->
-					</tr>
-				</thead>
-				<tbody>
-					<?php $i = 1;  ?>
-					<?php foreach ($departement as $d) : ?>
-						<tr>
-							<th scope="row"><?= $i; ?></th>
-							<td><?= $d['departement']; ?></td>
-							<td>
-								<a href="" class="badge badge-success" data-toggle="modal" data-target="#editMenuModal<?= $d['id']; ?>">Edit</a>
-								<a href="<?= base_url('departement/delete/') . $d['id']; ?>" class="badge badge-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus menu ini?');">Delete</a>
-							</td>
-						</tr>
-						<?php $i++; ?>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
+					<table class="table table-hover mt-3">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Departement</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php $i = 1;  ?>
+							<?php foreach ($departement as $d) : ?>
+								<tr>
+									<th scope="row"><?= $i; ?></th>
+									<td><?= $d['departement']; ?></td>
+									<td>
+										<a href="" class="badge badge-success" data-toggle="modal" data-target="#editMenuModal<?= $d['id']; ?>">Edit</a>
+										<a href="<?= base_url('departement/delete/') . $d['id']; ?>" class="badge badge-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus menu ini?');">Delete</a>
+									</td>
+								</tr>
+								<?php $i++; ?>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
+	<!-- End Card Section -->
 
 </div>
 <!-- /.container-fluid -->

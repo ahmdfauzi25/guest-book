@@ -8,44 +8,51 @@
 
 	<div class="row">
 		<div class="col-lg-6">
-			<?= form_error('admin/account', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
-			<?= $this->session->flashdata('message'); ?>
-			<a href="" class="btn btn-primary" data-toggle="modal" data-target="#newAccountModal">Add New Account</a>
+			<!-- Card untuk menampilkan informasi akun -->
+			<div class="card mb-4">
+				<div class="card-header">
+					<h5 class="m-0 font-weight-bold text-primary">Daftar Akun</h5>
+				</div>
+				<div class="card-body">
+					<?= form_error('admin/account', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+					<?= $this->session->flashdata('message'); ?>
+					<a href="" class="btn btn-primary" data-toggle="modal" data-target="#newAccountModal">Add New Account</a>
 
-			<table class="table table-hover mt-3">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Name</th>
-						<th scope="col">Email</th>
-						<th scope="col">Active</th>
-						<th scope="col">Created Since</th>
-						<th scope="col">Action</th>
-						<!-- <th scope="col">#</th> -->
-					</tr>
-				</thead>
-				<tbody>
-					<?php $i = 1;  ?>
-					<?php foreach ($all_users as $u) : ?>
-						<tr>
-							<th scope="row"><?= $i; ?></th>
-							<td><?= $u['name']; ?></td>
-							<td><?= $u['email']; ?></td>
-							<td><?php if($u['is_active'] == 1) : ?>
-									<span class="badge badge-success">Aktif</span>
-								<?php else : ?>
-									<span class="badge badge-danger">Non-aktif</span>
-								<?php endif; ?></td>
-							
-							<td><?= date('d F Y', $u['date_created']); ?></td>
-							<td>
-							<a href="<?= base_url('admin/deleteaccount/') . $u['id']; ?>" class="badge badge-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus menu ini?');">Delete</a>
-							</td>
-						</tr>
-						<?php $i++; ?>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
+					<table class="table table-hover mt-3">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Name</th>
+								<th scope="col">Email</th>
+								<th scope="col">Active</th>
+								<th scope="col">Created Since</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php $i = 1;  ?>
+							<?php foreach ($all_users as $u) : ?>
+								<tr>
+									<th scope="row"><?= $i; ?></th>
+									<td><?= $u['name']; ?></td>
+									<td><?= $u['email']; ?></td>
+									<td><?php if($u['is_active'] == 1) : ?>
+											<span class="badge badge-success">Aktif</span>
+										<?php else : ?>
+											<span class="badge badge-danger">Non-aktif</span>
+										<?php endif; ?></td>
+									
+									<td><?= date('d F Y', $u['date_created']); ?></td>
+									<td>
+									<a href="<?= base_url('admin/deleteaccount/') . $u['id']; ?>" class="badge badge-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus menu ini?');">Delete</a>
+									</td>
+								</tr>
+								<?php $i++; ?>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 
