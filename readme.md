@@ -1,7 +1,3 @@
-Here’s an enhanced and visually appealing version of your GitHub description with better spacing and bullet styling:  
-
----
-
 # 📖 **Guest Book Application** 🎉  
 Welcome to the **Guest Book Application** repository! 🚪✍️  
 
