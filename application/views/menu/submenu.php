@@ -22,6 +22,16 @@
 					<?php endif; ?>
 					<a href="" class="btn btn-primary" data-toggle="modal" data-target="#newSubMenuModal">Add New Sub-Menu</a>
 
+					<!-- Tambahkan kode untuk pagination -->
+					<?php
+					$limit = 10; // Jumlah entri per halaman
+					$total = count($subMenu); // Total entri
+					$totalPages = ceil($total / $limit); // Total halaman
+					$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Halaman saat ini
+					$offset = ($currentPage - 1) * $limit; // Offset untuk query
+					$subMenu = array_slice($subMenu, $offset, $limit); // Ambil entri untuk halaman saat ini
+					?>
+
 					<table class="table table-hover mt-3">
 						<thead>
 							<tr>
@@ -35,7 +45,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php $i = 1;  ?>
+							<?php $i = $offset + 1;  // Mulai dari offset ?>
 							<?php foreach ($subMenu as $sm) : ?>
 								<tr>
 									<th scope="row"><?= $i; ?></th>
@@ -58,6 +68,33 @@
 							<?php endforeach; ?>
 						</tbody>
 					</table>
+
+					<div class="mt-2">
+						Total Entri: <?= $total; ?>
+					</div>
+					<!-- Kode untuk menampilkan pagination -->
+					<nav aria-label="Page navigation" class="d-flex justify-content-center">
+						<ul class="pagination">
+							
+							<!-- Tombol Previous -->
+							<li class="page-item <?= ($currentPage == 1) ? 'disabled' : ''; ?>">
+								<a class="page-link" href="?page=<?= $currentPage-1; ?>" <?= ($currentPage == 1) ? 'tabindex="-1" aria-disabled="true"' : ''; ?>>Previous</a>
+							</li>
+
+							<?php for ($page = 1; $page <= $totalPages; $page++) : ?>
+								<li class="page-item <?= ($page == $currentPage) ? 'active' : ''; ?>">
+									<a class="page-link" href="?page=<?= $page; ?>"><?= $page; ?></a>
+								</li>
+							<?php endfor; ?>
+
+							<!-- Tombol Next -->
+							<li class="page-item <?= ($currentPage == $totalPages) ? 'disabled' : ''; ?>">
+								<a class="page-link" href="?page=<?= $currentPage+1; ?>" <?= ($currentPage == $totalPages) ? 'tabindex="-1" aria-disabled="true"' : ''; ?>>Next</a>
+							</li>
+						</ul>
+					</nav>
+					<!-- Informasi total entri dengan class text-center -->
+					
 				</div>
 			</div>
 		</div>
