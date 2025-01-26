@@ -237,32 +237,22 @@ class Admin extends CI_Controller
 
 	public function countGoodFeedback()
 	{
-		$today = date('Y-m-d'); // Mendapatkan tanggal hari ini
-		$this->db->where('rating >=', 3); // Menghitung rating 3-5
-		$this->db->where('DATE(submit_date)', $today); // Filter berdasarkan tanggal
-		$total_good_feedback = $this->db->count_all_results('feedback'); // Asumsi tabel feedback ada
-
-		// Mengembalikan total feedback baik
+		$this->db->where('rating >=', 4); // Menghitung rating 4-5
+		$total_good_feedback = $this->db->count_all_results('feedback');
 		return $total_good_feedback;
 	}
 
 	public function countBadFeedback()
 	{
-		$today = date('Y-m-d'); // Mendapatkan tanggal hari ini
 		$this->db->where('rating <=', 2); // Menghitung rating 1-2
-		$this->db->where('DATE(submit_date)', $today); // Filter berdasarkan tanggal
-		$total_bad_feedback = $this->db->count_all_results('feedback'); // Asumsi tabel feedback ada
-
-		// Mengembalikan total feedback buruk
+		$total_bad_feedback = $this->db->count_all_results('feedback');
 		return $total_bad_feedback;
 	}
 
 	public function countFeedbackSubmitted()
 	{
-		$today = date('Y-m-d'); // Mendapatkan tanggal hari ini
-		$this->db->where('DATE(submit_date)', $today); // Filter berdasarkan tanggal
-		$total_feedback_submitted = $this->db->count_all_results('feedback'); // Menghitung total feedback yang sudah diisi
-		return $total_feedback_submitted; // Mengembalikan total feedback yang sudah diisi
+		$total_feedback_submitted = $this->db->count_all_results('feedback');
+		return $total_feedback_submitted;
 	}
 
 
