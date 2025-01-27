@@ -2,7 +2,12 @@
 <div class="container-fluid">
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+	<div class="d-flex justify-content-between align-items-center mb-4">
+		<h1 class="h3 text-gray-800 mb-0"><?= $title; ?></h1>
+		<a href="<?= base_url('admin/pdf'); ?>" class="btn btn-danger btn-sm">
+			<i class="fas fa-file-pdf mr-2"></i>Export PDF
+		</a>
+	</div>
 
 	<div class="row">
 		<div class="col-xl-3">
@@ -123,8 +128,9 @@
 	<div class="row">
 		<div class="col-xl-12">
 			<div class="card shadow mb-4">
-				<div class="card-header py-3">
+				<div class="card-header py-3 d-flex justify-content-between align-items-center">
 					<h6 class="m-0 font-weight-bold text-primary">Data Guest</h6>
+					
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
@@ -133,12 +139,16 @@
 					<tr>
 						<th scope="col">#</th>
 						<th scope="col">Name Quest</th>
+						<th scope="col">No Badge</th>
+						<th scope="col">Visitor Phi</th>
 						<th scope="col">Instansi</th>
 						<th scope="col">Service Type</th>
 						<th scope="col">Telp</th>
 						<th scope="col">Needs</th>
 						<th scope="col">Arrival Time</th>
 						<th scope="col">Return Time</th>
+						<th scope="col">Floor</th>
+						<th scope="col">Room</th>
 						<th scope="col">Schedule</th>
 						<th scope="col">Status</th>
 						<!-- <th scope="col">Action</th> -->
@@ -151,6 +161,8 @@
 						<tr>
 							<th scope="row"><?= $i; ?></th>
 							<td><?= $gb['name_guest']; ?></td>
+							<td><?= $gb['no_badge']; ?></td>
+							<td><?= $gb['visitor_phi']; ?></td>
 							<td><?= $gb['instansi']; ?></td>
 							<td><?php 
 								foreach($servicetype as $s) {
@@ -164,6 +176,22 @@
 							<td><?= $gb['kepentingan']; ?></td>
 							<td><?= $gb['waktu_kedatangan']; ?></td>
 							<td><?= $gb['waktu_kepulangan']; ?></td>
+							<td><?php 
+								foreach($floor as $f) {
+									if($f['id'] == $gb['floor_id']) {
+										echo $f['floor'];
+										break;
+									}
+								}
+							?></td>
+							<td><?php 
+								foreach($room as $r) {
+									if($r['id'] == $gb['room_id']) {
+										echo $r['room'];
+										break;
+									}
+								}
+							?></td>
 							<td><?= date('d-m-Y', strtotime($gb['date_created'])); ?></td>
 							<td>
 							<?php if($gb['status'] == 1) : ?>

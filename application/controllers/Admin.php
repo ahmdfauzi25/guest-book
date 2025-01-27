@@ -22,6 +22,10 @@ class Admin extends CI_Controller
 		$data['guestbook'] = $this->db->get_where('guestbook', ['date_created' => date('Y-m-d')])->result_array();
 		$this->load->model('Servicetype_model', 'servicetype');
 		$data['servicetype'] = $this->db->get('servicetype')->result_array();
+		$this->load->model('Floor_model', 'floor');
+		$data['floor'] = $this->db->get('floor')->result_array();
+		$this->load->model('Room_model', 'room');
+		$data['room'] = $this->db->get('room')->result_array();
 		$data['total_feedback_submitted'] = $this->countFeedbackSubmitted();
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar', $data);
@@ -255,6 +259,33 @@ class Admin extends CI_Controller
 		return $total_feedback_submitted;
 	}
 
+	public function pdf() {
+		$this->load->library('dompdf_gen');
+		
+		// Mengambil data yang sama seperti di fungsi index
+		$data['total_guests'] = $this->countGuestsToday();
+		$data['total_guests_month'] = $this->countGuestsPerMonth();
+		$data['total_good_feedback'] = $this->countGoodFeedback();
+		$data['total_bad_feedback'] = $this->countBadFeedback();
+		$data['guestbook'] = $this->db->get_where('guestbook', ['date_created' => date('Y-m-d')])->result_array();
+		$data['servicetype'] = $this->db->get('servicetype')->result_array();
+		$data['total_feedback_submitted'] = $this->countFeedbackSubmitted();
+
+		// Load view untuk PDF
+		$html = $this->load->view('admin/export_pdf', $data, true);
+		
+		// Konfigurasi DOMPDF
+		$paper_size = 'A4';
+		$orientation = 'portrait';
+		$this->dompdf->set_paper($paper_size, $orientation);
+		
+		// Convert HTML ke PDF
+		$this->dompdf->load_html($html);
+		$this->dompdf->render();
+		
+		// Output PDF (unduh file)
+		$this->dompdf->stream("laporan_dashboard_".date('Y-m-d').".pdf", array('Attachment' => 0));
+	}
 
 	
 }

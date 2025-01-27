@@ -17,16 +17,24 @@ class Guestbook extends CI_Controller
 
 		// $data['guestbook'] = $this->db->get('guestbook')->result_array();
 		$this->load->model('Servicetype_model', 'servicetype');
+		$this->load->model('Floor_model', 'floor');
+		$this->load->model('Room_model', 'room');
 		$data['guestbook'] = $this->servicetype->getServicetype();
 		$data['servicetype'] = $this->db->get('servicetype')->result_array();
+		$data['floor'] = $this->db->get('floor')->result_array();
+		$data['room'] = $this->db->get('room')->result_array();
 		// Set validation rules
 		$this->form_validation->set_rules('name_guest', 'Nama', 'required');
+		$this->form_validation->set_rules('no_badge', 'Nama', 'required');
+		$this->form_validation->set_rules('visitor_phi', 'Nama', 'required');
 		$this->form_validation->set_rules('instansi', 'Nama Instansi', 'required');
 		$this->form_validation->set_rules('servicetype_id', 'Service Type', 'required');
 		$this->form_validation->set_rules('no_telp', 'No Telepon', 'required');
 		$this->form_validation->set_rules('kepentingan', 'Kepentingan', 'required');
 		$this->form_validation->set_rules('waktu_kedatangan', 'Waktu Kedatangan', 'required');
 		$this->form_validation->set_rules('waktu_kepulangan', 'Waktu Kepulangan', 'required');
+		$this->form_validation->set_rules('floor_id', 'Lantai', 'required');
+		$this->form_validation->set_rules('room_id', 'Room', 'required');
 		$this->form_validation->set_rules('date_created', 'Tanggal Dibuat', 'required');
 		$this->form_validation->set_rules('status', 'Status', 'required');
 
@@ -39,12 +47,16 @@ class Guestbook extends CI_Controller
 		} else {
 			$data = [
 				'name_guest' => htmlspecialchars($this->input->post('name_guest', true)),
+				'no_badge' => htmlspecialchars($this->input->post('no_badge', true)),
+				'visitor_phi' => htmlspecialchars($this->input->post('visitor_phi', true)),
 				'instansi' => htmlspecialchars($this->input->post('instansi', true)),
 				'servicetype_id' => htmlspecialchars($this->input->post('servicetype_id', true)),
 				'no_telp' => htmlspecialchars($this->input->post('no_telp', true)),
 				'kepentingan' => htmlspecialchars($this->input->post('kepentingan', true)),
 				'waktu_kedatangan' => htmlspecialchars($this->input->post('waktu_kedatangan', true)),
 				'waktu_kepulangan' => htmlspecialchars($this->input->post('waktu_kepulangan', true)),
+				'floor_id' => htmlspecialchars($this->input->post('floor_id', true)),
+				'room_id' => htmlspecialchars($this->input->post('room_id', true)),
 				'date_created' => htmlspecialchars($this->input->post('date_created', true)),
 				'status' => htmlspecialchars($this->input->post('status', true))
 			];
@@ -63,12 +75,16 @@ class Guestbook extends CI_Controller
 
 		// Set validation rules
 		$this->form_validation->set_rules('name_guest', 'Nama', 'required');
+		$this->form_validation->set_rules('no_badge', 'Nama', 'required');
+		$this->form_validation->set_rules('visitor_phi', 'Nama', 'required');
 		$this->form_validation->set_rules('instansi', 'Nama Instansi', 'required');
 		$this->form_validation->set_rules('servicetype_id', 'Service Type', 'required');
 		$this->form_validation->set_rules('no_telp', 'No Telepon', 'required');
 		$this->form_validation->set_rules('kepentingan', 'Kepentingan', 'required');
 		$this->form_validation->set_rules('waktu_kedatangan', 'Waktu Kedatangan', 'required');
 		$this->form_validation->set_rules('waktu_kepulangan', 'Waktu Kepulangan', 'required');
+		$this->form_validation->set_rules('floor_id', 'Lantai', 'required');
+		$this->form_validation->set_rules('room_id', 'Room', 'required');
 		$this->form_validation->set_rules('date_created', 'Tanggal Dibuat', 'required');
 		$this->form_validation->set_rules('status', 'Status', 'required');
 
@@ -81,12 +97,16 @@ class Guestbook extends CI_Controller
 		} else {
 			$data = [
 				'name_guest' => htmlspecialchars($this->input->post('name_guest', true)),
+				'no_badge' => htmlspecialchars($this->input->post('no_badge', true)),
+				'visitor_phi' => htmlspecialchars($this->input->post('visitor_phi', true)),
 				'instansi' => htmlspecialchars($this->input->post('instansi', true)),
 				'servicetype_id' => htmlspecialchars($this->input->post('servicetype_id', true)),
 				'no_telp' => htmlspecialchars($this->input->post('no_telp', true)),
 				'kepentingan' => htmlspecialchars($this->input->post('kepentingan', true)),
 				'waktu_kedatangan' => htmlspecialchars($this->input->post('waktu_kedatangan', true)),
 				'waktu_kepulangan' => htmlspecialchars($this->input->post('waktu_kepulangan', true)),
+				'floor_id' => htmlspecialchars($this->input->post('floor_id', true)),
+				'room_id' => htmlspecialchars($this->input->post('room_id', true)),
 				'date_created' => htmlspecialchars($this->input->post('date_created', true)),
 				'status' => htmlspecialchars($this->input->post('status', true))
 			];

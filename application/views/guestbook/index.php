@@ -22,12 +22,16 @@
 							<tr>
 								<th scope="col">#</th>
 								<th scope="col">Name Quest</th>
+								<th scope="col">No Badge</th>
+								<th scope="col">Visitor Phi</th>
 								<th scope="col">Instansi</th>
 								<th scope="col">Service Type</th>
 								<th scope="col">Telp</th>
 								<th scope="col">Needs</th>
 								<th scope="col">Arrival Time</th>
 								<th scope="col">Return Time</th>
+								<th scope="col">Floor</th>
+								<th scope="col">Room</th>
 								<th scope="col">Schedule</th>
 								<th scope="col">Status</th>
 								<th scope="col">Action</th>
@@ -39,6 +43,8 @@
 								<tr>
 									<th scope="row"><?= $i; ?></th>
 									<td><?= $gb['name_guest']; ?></td>
+									<td><?= $gb['no_badge']; ?></td>
+									<td><?= $gb['visitor_phi']; ?></td>
 									<td><?= $gb['instansi']; ?></td>
 									<td><?php 
 										foreach($servicetype as $s) {
@@ -52,6 +58,22 @@
 									<td><?= $gb['kepentingan']; ?></td>
 									<td><?= $gb['waktu_kedatangan']; ?></td>
 									<td><?= $gb['waktu_kepulangan']; ?></td>
+									<td><?php 
+										foreach($floor as $f) {
+											if($f['id'] == $gb['floor_id']) {
+												echo $f['floor'];
+												break;
+											}
+										}
+									?></td>
+									<td><?php 
+										foreach($room as $r) {
+											if($r['id'] == $gb['room_id']) {
+												echo $r['room'];
+												break;
+											}
+										}
+									?></td>
 									<td><?= date('d-m-Y', strtotime($gb['date_created'])); ?></td>
 									<td>
 										<?php if($gb['status'] == 1) : ?>
@@ -103,6 +125,12 @@
 						<input type="text" class="form-control" id="name_guest" name="name_guest" placeholder="Name Quest">
 					</div>
 					<div class="form-group">
+						<input type="text" class="form-control" id="no_badge" name="no_badge" placeholder="No Badge">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="visitor_phi" name="visitor_phi" placeholder="Visitor Phi">
+					</div>
+					<div class="form-group">
 						<input type="text" class="form-control" id="instansi" name="instansi" placeholder="Instansi">
 					</div>
 					<div class="form-group">
@@ -129,6 +157,24 @@
 					<div class="form-group">
 						<!-- Mengubah input waktu kepulagan menjadi pemilih waktu -->
 						<input type="time" class="form-control" id="waktu_kepulangan" name="waktu_kepulangan">
+					</div>
+					<div class="form-group">
+						<!-- <label for="formGroupInput"></label> -->
+						<select name="floor_id" id="floor_id" class="form-control">
+							<option value="">Select Floor</option>
+							<?php foreach ($floor as $f) : ?>
+								<option value="<?= $f['id']; ?>"><?= $f['floor']; ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+					<div class="form-group">
+						<!-- <label for="formGroupInput"></label> -->
+						<select name="room_id" id="room_id" class="form-control">
+							<option value="">Select Room</option>
+							<?php foreach ($room as $r) : ?>
+								<option value="<?= $r['id']; ?>"><?= $r['room']; ?></option>
+							<?php endforeach; ?>
+						</select>
 					</div>
 					<div class="form-group">
 						<input type="date" class="form-control" id="date_created" name="date_created">
@@ -168,6 +214,12 @@
 						<input type="text" class="form-control" id="name_guest" name="name_guest" placeholder="Name Quest" value="<?= $gb['name_guest']; ?>">
 					</div>
 					<div class="form-group">
+						<input type="text" class="form-control" id="no_badge" name="no_badge" placeholder="No Badge" value="<?= $gb['no_badge']; ?>">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="visitor_phi" name="visitor_phi" placeholder="Visitor Phi" value="<?= $gb['visitor_phi']; ?>">
+					</div>
+					<div class="form-group">
 						<input type="text" class="form-control" id="instansi" name="instansi" placeholder="Instansi" value="<?= $gb['instansi']; ?>">
 					</div>
 					<div class="form-group">
@@ -193,6 +245,22 @@
 					<div class="form-group">
 						<!-- Mengubah input waktu kepulagan menjadi pemilih waktu -->
 						<input type="time" class="form-control" id="waktu_kepulangan" name="waktu_kepulangan" value="<?= $gb['waktu_kepulangan']; ?>">
+					</div>
+					<div class="form-group">
+						<select name="floor_id" id="floor_id" class="form-control">
+							<option value="">Select Floor</option>
+							<?php foreach ($floor as $f) : ?>
+								<option value="<?= $f['id']; ?>" <?= ($f['id'] == $gb['floor_id']) ? 'selected' : ''; ?>><?= $f['floor']; ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+					<div class="form-group">
+						<select name="room_id" id="room_id" class="form-control">
+							<option value="">Select Room</option>
+							<?php foreach ($room as $r) : ?>
+								<option value="<?= $r['id']; ?>" <?= ($r['id'] == $gb['room_id']) ? 'selected' : ''; ?>><?= $r['room']; ?></option>
+							<?php endforeach; ?>
+						</select>
 					</div>
 					<div class="form-group">
 						<input type="date" class="form-control" id="date_created" name="date_created" value="<?= $gb['date_created']; ?>">
