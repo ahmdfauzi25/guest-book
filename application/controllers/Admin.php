@@ -269,6 +269,8 @@ class Admin extends CI_Controller
 		$data['total_bad_feedback'] = $this->countBadFeedback();
 		$data['guestbook'] = $this->db->get_where('guestbook', ['date_created' => date('Y-m-d')])->result_array();
 		$data['servicetype'] = $this->db->get('servicetype')->result_array();
+		$data['floor'] = $this->db->get('floor')->result_array();
+		$data['room'] = $this->db->get('room')->result_array();
 		$data['total_feedback_submitted'] = $this->countFeedbackSubmitted();
 
 		// Load view untuk PDF
@@ -276,7 +278,7 @@ class Admin extends CI_Controller
 		
 		// Konfigurasi DOMPDF
 		$paper_size = 'A4';
-		$orientation = 'portrait';
+		$orientation = 'landscape';
 		$this->dompdf->set_paper($paper_size, $orientation);
 		
 		// Convert HTML ke PDF
