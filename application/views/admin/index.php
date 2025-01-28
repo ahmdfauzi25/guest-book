@@ -16,7 +16,7 @@
 					<h6 class="m-0 font-weight-bold text-primary">Guest Today</h6>
 				</div>
 				<div class="card-body position-relative">
-					<canvas id="guestsChart" style="height: 262px; width:400px;"></canvas>
+					<canvas id="guestsChart" style="height: 264px; width:400px;"></canvas>
 					<div class="total-guests-circle">
 						<span class="total-number"><?= $total_guests; ?></span>
 					</div>
@@ -253,17 +253,26 @@
 		type: 'doughnut',
 		data: {
 			labels: [<?php 
-				$labels = array_map(function($floor) {
-					return "\"Lantai " . $floor['floor_name'] . "\"";
-				}, $guests_per_floor);
-				echo implode(", ", $labels);
+				if (!empty($guests_per_floor)) {
+					$labels = array_map(function($floor) {
+						$floorName = isset($floor['floor_name']) ? $floor['floor_name'] : $floor['floor'];
+						return "\" " . $floorName . "\"";
+					}, $guests_per_floor);
+					echo implode(", ", $labels);
+				} else {
+					echo '"Tidak ada data"';
+				}
 			?>],
 			datasets: [{
 				data: [<?php 
-					$values = array_map(function($floor) {
-						return $floor['total_guests'];
-					}, $guests_per_floor);
-					echo implode(", ", $values);
+					if (!empty($guests_per_floor)) {
+						$values = array_map(function($floor) {
+							return $floor['total_guests'];
+						}, $guests_per_floor);
+						echo implode(", ", $values);
+					} else {
+						echo "0";
+					}
 				?>],
 				backgroundColor: [
 					'#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b',
@@ -278,6 +287,18 @@
 			plugins: {
 				legend: {
 					position: 'top'
+				},
+				tooltip: {
+					callbacks: {
+						label: function(context) {
+							let label = context.label || '';
+							if (label) {
+								label += ' : ';
+							}
+							label += context.formattedValue + ' Tamu';
+							return label;
+						}
+					}
 				}
 			}
 		}
