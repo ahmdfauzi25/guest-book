@@ -16,9 +16,9 @@
 					<h6 class="m-0 font-weight-bold text-primary">Guest Today</h6>
 				</div>
 				<div class="card-body position-relative">
-					<canvas id="guestsChart" style="height: 400px; width:400px;"></canvas>
+					<canvas id="guestsChart" style="height: 262px; width:400px;"></canvas>
 					<div class="total-guests-circle">
-						<?= $total_guests; ?>
+						<span class="total-number"><?= $total_guests; ?></span>
 					</div>
 				</div>
 			</div>
@@ -252,40 +252,58 @@
 	var guestsChart = new Chart(ctx, {
 		type: 'doughnut',
 		data: {
-			labels: ['Total Today'],
+			labels: [<?php 
+				$labels = array_map(function($floor) {
+					return "\"Lantai " . $floor['floor_name'] . "\"";
+				}, $guests_per_floor);
+				echo implode(", ", $labels);
+			?>],
 			datasets: [{
-				label: 'Jumlah Tamu',
-				data: [<?= $total_guests; ?>], // Ganti 100 dengan total tamu yang sesuai
-				backgroundColor: ['#36A2EB', '#FF6384'],
+				data: [<?php 
+					$values = array_map(function($floor) {
+						return $floor['total_guests'];
+					}, $guests_per_floor);
+					echo implode(", ", $values);
+				?>],
+				backgroundColor: [
+					'#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b',
+					'#858796', '#5a5c69', '#2e59d9', '#17a673', '#2c9faf'
+				],
+				borderWidth: 1
 			}]
 		},
 		options: {
-			responsive: true,
+			maintainAspectRatio: false,
+			cutout: '60%',
 			plugins: {
 				legend: {
-					position: 'top',
-				},
+					position: 'top'
+				}
 			}
 		}
 	});
+
+	
 </script>
 
 <style>
 .total-guests-circle {
-    position: absolute;
-    top: 55%;
-    left: 49%;
-    transform: translate(-50%, -50%);
-    background-color: white; /* Warna latar belakang */
-    border-radius: 50%; /* Membuat bulatan */
-    width: 80px; /* Ukuran bulatan */
-    height: 80px; /* Ukuran bulatan */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold; /* Gaya teks */
-    color: black; /* Warna teks */
-    font-size: 85px; /* Ukuran font diperbesar */
+	position: absolute;
+	top: 55%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	font-size: 14px;
+	line-height: 1.4;
+	/* background: rgba(255, 255, 255, 0.9); */
+	padding: 10px;
+	border-radius: 8px;
+}
+
+.total-number {
+	font-size: 75px;
+	font-weight: 700;
+	color: #000000;
 }
 </style>
 

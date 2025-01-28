@@ -27,6 +27,7 @@ class Admin extends CI_Controller
 		$this->load->model('Room_model', 'room');
 		$data['room'] = $this->db->get('room')->result_array();
 		$data['total_feedback_submitted'] = $this->countFeedbackSubmitted();
+		$data['guests_per_floor'] = $this->countGuestsPerFloor();
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/topbar', $data);
@@ -289,5 +290,15 @@ class Admin extends CI_Controller
 		$this->dompdf->stream("laporan_dashboard_".date('Y-m-d').".pdf", array('Attachment' => 0));
 	}
 
-	
+	public function countGuestsPerFloor()
+	{
+		$today = date('Y-m-d');
+		$this->db->select('floor.floor as floor_name, COUNT(guestbook.id) as total_guests');
+		$this->db->from('guestbook');
+		$this->db->join('room', 'guestbook.room_id = room.id');
+		$this->db->join('floor', 'guestbook.floor_id = floor.id');
+		$this->db->where('DATE(guestbook.date_created)', $today);
+		$this->db->group_by('floor.id');
+		return $this->db->get()->result_array();
+	}
 }
