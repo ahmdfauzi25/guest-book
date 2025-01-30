@@ -17,80 +17,82 @@
 				<div class="card-body">
 					<?= form_error('guestbook', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
 					<?= $this->session->flashdata('message'); ?>
-					<table class="table table-hover mt-3">
-						<thead>
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">Name Quest</th>
-								<th scope="col">No Badge</th>
-								<th scope="col">Visitor Phi</th>
-								<th scope="col">Instansi</th>
-								<th scope="col">Service Type</th>
-								<th scope="col">Telp</th>
-								<th scope="col">Needs</th>
-								<th scope="col">Arrival Time</th>
-								<th scope="col">Return Time</th>
-								<th scope="col">Floor</th>
-								<th scope="col">Room</th>
-								<th scope="col">Schedule</th>
-								<th scope="col">Status</th>
-								<th scope="col">Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php $i = 1; ?>
-							<?php foreach ($guestbook as $gb) : ?>
+					<div class="table-responsive">
+						<table class="table table-hover mt-3">
+							<thead>
 								<tr>
-									<th scope="row"><?= $i; ?></th>
-									<td><?= $gb['name_guest']; ?></td>
-									<td><?= $gb['no_badge']; ?></td>
-									<td><?= $gb['visitor_phi']; ?></td>
-									<td><?= $gb['instansi']; ?></td>
-									<td><?php 
-										foreach($servicetype as $s) {
-											if($s['id'] == $gb['servicetype_id']) {
-												echo $s['service_type'];
-												break;
-											}
-										}
-									?></td>
-									<td><?= $gb['no_telp']; ?></td>
-									<td><?= $gb['kepentingan']; ?></td>
-									<td><?= $gb['waktu_kedatangan']; ?></td>
-									<td><?= $gb['waktu_kepulangan']; ?></td>
-									<td><?php 
-										foreach($floor as $f) {
-											if($f['id'] == $gb['floor_id']) {
-												echo $f['floor'];
-												break;
-											}
-										}
-									?></td>
-									<td><?php 
-										foreach($room as $r) {
-											if($r['id'] == $gb['room_id']) {
-												echo $r['room'];
-												break;
-											}
-										}
-									?></td>
-									<td><?= date('d-m-Y', strtotime($gb['date_created'])); ?></td>
-									<td>
-										<?php if($gb['status'] == 1) : ?>
-											<span class="badge badge-success">Sudah Hadir</span>
-										<?php else : ?>
-											<span class="badge badge-warning">Belum Hadir</span>
-										<?php endif; ?>
-									</td>
-									<td>
-										<a href="" class="badge badge-success" data-toggle="modal" data-target="#editGuestbookModal<?= $gb['id']; ?>">Edit</a>
-										<a href="<?=base_url('guestbook/delete/') . $gb['id']; ?>" class="badge badge-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus Tamu ini?');">Delete</a>
-									</td>
+									<th scope="col">#</th>
+									<th scope="col">Name Quest</th>
+									<th scope="col">No Badge</th>
+									<th scope="col">Visitor Phi</th>
+									<th scope="col">Instansi</th>
+									<th scope="col">Service Type</th>
+									<th scope="col">Telp</th>
+									<th scope="col">Needs</th>
+									<th scope="col">Arrival Time</th>
+									<th scope="col">Return Time</th>
+									<th scope="col">Floor</th>
+									<th scope="col">Room</th>
+									<th scope="col">Schedule</th>
+									<th scope="col">Status</th>
+									<th scope="col">Action</th>
 								</tr>
-								<?php $i++; ?>
-							<?php endforeach; ?>
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								<?php $i = 1; ?>
+								<?php foreach ($guestbook as $gb) : ?>
+									<tr>
+										<th scope="row"><?= $i; ?></th>
+										<td><?= $gb['name_guest']; ?></td>
+										<td><?= $gb['no_badge']; ?></td>
+										<td><?= $gb['visitor_phi']; ?></td>
+										<td><?= $gb['instansi']; ?></td>
+										<td><?php 
+											foreach($servicetype as $s) {
+												if($s['id'] == $gb['servicetype_id']) {
+													echo $s['service_type'];
+													break;
+												}
+											}
+										?></td>
+										<td><?= $gb['no_telp']; ?></td>
+										<td><?= $gb['kepentingan']; ?></td>
+										<td><?= $gb['waktu_kedatangan']; ?></td>
+										<td><?= $gb['waktu_kepulangan']; ?></td>
+										<td><?php 
+											foreach($floor as $f) {
+												if($f['id'] == $gb['floor_id']) {
+													echo $f['floor'];
+													break;
+												}
+											}
+										?></td>
+										<td><?php 
+											foreach($room as $r) {
+												if($r['id'] == $gb['room_id']) {
+													echo $r['room'];
+													break;
+												}
+											}
+										?></td>
+										<td><?= date('d-m-Y', strtotime($gb['date_created'])); ?></td>
+										<td>
+											<?php if($gb['status'] == 1) : ?>
+												<span class="badge badge-success">Sudah Hadir</span>
+											<?php else : ?>
+												<span class="badge badge-warning">Belum Hadir</span>
+											<?php endif; ?>
+										</td>
+										<td>
+											<a href="" class="badge badge-success" data-toggle="modal" data-target="#editGuestbookModal<?= $gb['id']; ?>">Edit</a>
+											<a href="<?=base_url('guestbook/delete/') . $gb['id']; ?>" class="badge badge-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus Tamu ini?');">Delete</a>
+										</td>
+									</tr>
+									<?php $i++; ?>
+								<?php endforeach; ?>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -282,4 +284,15 @@
 	</div>
 </div>
 <?php endforeach; ?>
+
+<style>
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table {
+    min-width: 1200px; /* Sesuaikan dengan kebutuhan */
+}
+</style>
 

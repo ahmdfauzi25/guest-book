@@ -16,21 +16,25 @@
 					<h6 class="m-0 font-weight-bold text-primary">Guest Today</h6>
 				</div>
 				<div class="card-body position-relative">
-					<canvas id="guestsChart" style="height: 264px; width:400px;"></canvas>
-					<div class="total-guests-circle">
-						<span class="total-number"><?= $total_guests; ?></span>
-					</div>
-				</div>
-			</div>
+                <div class="chart-container">
+                    <canvas id="guestsChart"></canvas>
+                    <div class="total-guests-circle">
+                        <span class="total-number"><?= $total_guests; ?></span>
+                    </div>
+                </div>
+            </div>
+        </div>
 		</div>
 		<div class="col-xl-9">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">Guest Monthly</h6>
 				</div>
-				<div class="card-body">
-					<canvas id="myLineChart" style="height: 340px; width:1160px;"></canvas>
-				</div>
+				<div class="card-body position-relative">
+                <div class="chart-container2">
+                    <canvas id="myLineChart"></canvas>
+                </div>
+            </div>
 			</div>
 		</div>
 	</div>
@@ -134,77 +138,77 @@
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
-						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-						<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Name Quest</th>
-						<th scope="col">No Badge</th>
-						<th scope="col">Visitor Phi</th>
-						<th scope="col">Instansi</th>
-						<th scope="col">Service Type</th>
-						<th scope="col">Telp</th>
-						<th scope="col">Needs</th>
-						<th scope="col">Arrival Time</th>
-						<th scope="col">Return Time</th>
-						<th scope="col">Floor</th>
-						<th scope="col">Room</th>
-						<th scope="col">Schedule</th>
-						<th scope="col">Status</th>
-						<!-- <th scope="col">Action</th> -->
-						<!-- <th scope="col">#</th> -->
-					</tr>
-				</thead>
-				<tbody>
-					<?php $i = 1;  ?>
-					<?php foreach ($guestbook as $gb) : ?>
-						<tr>
-							<th scope="row"><?= $i; ?></th>
-							<td><?= $gb['name_guest']; ?></td>
-							<td><?= $gb['no_badge']; ?></td>
-							<td><?= $gb['visitor_phi']; ?></td>
-							<td><?= $gb['instansi']; ?></td>
-							<td><?php 
-								foreach($servicetype as $s) {
-									if($s['id'] == $gb['servicetype_id']) {
-										echo $s['service_type'];
-										break;
-									}
-								}
-							?></td>
-							<td><?= $gb['no_telp']; ?></td>
-							<td><?= $gb['kepentingan']; ?></td>
-							<td><?= $gb['waktu_kedatangan']; ?></td>
-							<td><?= $gb['waktu_kepulangan']; ?></td>
-							<td><?php 
-								foreach($floor as $f) {
-									if($f['id'] == $gb['floor_id']) {
-										echo $f['floor'];
-										break;
-									}
-								}
-							?></td>
-							<td><?php 
-								foreach($room as $r) {
-									if($r['id'] == $gb['room_id']) {
-										echo $r['room'];
-										break;
-									}
-								}
-							?></td>
-							<td><?= date('d-m-Y', strtotime($gb['date_created'])); ?></td>
-							<td>
-							<?php if($gb['status'] == 1) : ?>
-									<span class="badge badge-success">Sudah Hadir</span>
-								<?php else : ?>
-									<span class="badge badge-warning">Belum Hadir</span>
-								<?php endif; ?>
-							</td>
-						</tr>
-						<?php $i++; ?>
-					<?php endforeach; ?>
-				</tbody>
-						</table>
+						<div style="min-width: 1200px;">
+							<table class="table table-bordered" id="dataTable" cellspacing="0">
+								<thead>
+									<tr>
+										<th style="width: 3%;">#</th>
+										<th style="width: 10%;">Name Quest</th>
+										<th style="width: 7%;">No Badge</th>
+										<th style="width: 8%;">Visitor Phi</th>
+										<th style="width: 10%;">Instansi</th>
+										<th style="width: 8%;">Service Type</th>
+										<th style="width: 8%;">Telp</th>
+										<th style="width: 10%;">Needs</th>
+										<th style="width: 8%;">Arrival Time</th>
+										<th style="width: 8%;">Return Time</th>
+										<th style="width: 5%;">Floor</th>
+										<th style="width: 5%;">Room</th>
+										<th style="width: 5%;">Schedule</th>
+										<th style="width: 5%;">Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php $i = 1;  ?>
+									<?php foreach ($guestbook as $gb) : ?>
+										<tr>
+											<th scope="row"><?= $i; ?></th>
+											<td><?= $gb['name_guest']; ?></td>
+											<td><?= $gb['no_badge']; ?></td>
+											<td><?= $gb['visitor_phi']; ?></td>
+											<td><?= $gb['instansi']; ?></td>
+											<td><?php 
+												foreach($servicetype as $s) {
+													if($s['id'] == $gb['servicetype_id']) {
+														echo $s['service_type'];
+														break;
+													}
+												}
+											?></td>
+											<td><?= $gb['no_telp']; ?></td>
+											<td><?= $gb['kepentingan']; ?></td>
+											<td><?= $gb['waktu_kedatangan']; ?></td>
+											<td><?= $gb['waktu_kepulangan']; ?></td>
+											<td><?php 
+												foreach($floor as $f) {
+													if($f['id'] == $gb['floor_id']) {
+														echo $f['floor'];
+														break;
+													}
+												}
+											?></td>
+											<td><?php 
+												foreach($room as $r) {
+													if($r['id'] == $gb['room_id']) {
+														echo $r['room'];
+														break;
+													}
+												}
+											?></td>
+											<td><?= date('d-m-Y', strtotime($gb['date_created'])); ?></td>
+											<td>
+											<?php if($gb['status'] == 1) : ?>
+													<span class="badge badge-success">Sudah Hadir</span>
+												<?php else : ?>
+													<span class="badge badge-warning">Belum Hadir</span>
+												<?php endif; ?>
+											</td>
+										</tr>
+										<?php $i++; ?>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -240,9 +244,23 @@
 			}]
 		},
 		options: {
+			maintainAspectRatio: false,
 			scales: {
 				y: {
-					beginAtZero: false
+					beginAtZero: true,
+					grid: {
+						drawBorder: false
+					}
+				},
+				x: {
+					grid: {
+						drawBorder: false
+					}
+				}
+			},
+			plugins: {
+				legend: {
+					position: 'top'
 				}
 			}
 		}
@@ -325,6 +343,45 @@
 	font-size: 75px;
 	font-weight: 700;
 	color: #000000;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#dataTable th, #dataTable td {
+    white-space: nowrap;
+    padding: 8px 12px;
+}
+
+.table-responsive::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+.chart-container2 {
+    position: relative;
+    height: 300px;
+    width: 100%;
 }
 </style>
 
